@@ -39,19 +39,16 @@ const prizePool = [
     "🐍 銀蛇狂舞，鈔票滿庫！🎉",
     "🐍 新年開運，卷起一波好運勢！🎉",
     "🐍 這一年，財富像蛇一樣蜿蜒成山！🎉",
-    "🐍 新年開運，卷起一波好運勢！",
     "🐯 恭喜獲得一顆肥美的胖虎頭！但好像沒人要？😂",
     "🐯 胖虎親手送你一張「懶惰券」，今年繼續耍廢！",
     "🐯 你刮開了一個胖虎抱枕！可是胖虎說：「不給！」",
     "🐯 你抽中了「胖虎貼紙」！但它已經被胖虎自己舔走了！😂",
     "🐯 胖虎對你說：「我決定讓你變成我的小弟！要幫我收紅包！」",
-    
-  
-  
 ];
 
+// **修正關鍵：將獎項顯示到 `result` div**
 const randomPrize = prizePool[Math.floor(Math.random() * prizePool.length)];
-document.getElementById("scratchCanvas").setAttribute("data-prize", randomPrize);
+document.getElementById("result").innerText = randomPrize;
 
 // 儲存刮除狀態
 let isScratching = false;
