@@ -1,61 +1,85 @@
-const canvas = document.getElementById("scratchCanvas");
-const ctx = canvas.getContext("2d");
-canvas.width = 300;
-canvas.height = 150;
-const hiddenContent = document.getElementById("hiddenContent");
+const scratchCanvas = document.getElementById("scratchCanvas");
+const resultCanvas = document.getElementById("resultCanvas");
+const scratchCtx = scratchCanvas.getContext("2d");
+const resultCtx = resultCanvas.getContext("2d");
 
-// **將獎項設定給 `hiddenContent`**
+scratchCanvas.width = resultCanvas.width = 300;
+scratchCanvas.height = resultCanvas.height = 150;
+
+// **設置獎項**
 const prizePool = [
-  "🐍 恭喜你中了1000萬～找胖虎領獎去！🎉",
-  "🐍 蛇來運轉，財源滾滾！🎉",
-  "🐍 靈蛇獻瑞，好運連連！🎉",
-  "🐍 今年行大運，錢包變長條！🎉",
-  "🐍 龍騰虎躍，蛇年大發！🎉",
-  "🐍 變身靈蛇，靈活閃避窮神！🎉",
-  "🐍 蛇來運轉，買股票不當韭菜！🎉",
-  "🐍 銀蛇狂舞，鈔票滿庫！🎉",
-  "🐍 新年開運，卷起一波好運勢！🎉",
-  "🐍 這一年，財富像蛇一樣蜿蜒成山！🎉",
-  "🐯 恭喜獲得一顆肥美的胖虎頭！但好像沒人要？😂",
-  "🐯 胖虎親手送你一張「懶惰券」，今年繼續耍廢！",
-  "🐯 你刮開了一個胖虎抱枕！可是胖虎說：「不給！」",
-  "🐯 你抽中了「胖虎貼紙」！但它已經被胖虎自己舔走了！😂",
-  "🐯 胖虎對你說：「我決定讓你變成我的小弟！要幫我收紅包！」",
+  "🐍 身體靈活如蛇，健康長壽不老！",
+  "🐍 銀蛇獻瑞，強身健體，健康滿分！",
+  "🐍 今年少病痛，多歡笑，身體健康最重要！",
+  "🐍 蛇年來報喜，願你遠離病痛，健康久久！",
+  "🐍 健康如龍蛇飛舞，精神奕奕每一天！",
+  "🐍 祝你筋骨柔軟，身體靈活，活力滿滿！",
+  "🐍 這一年，遠離感冒與壓力，健康快樂陪著你！",
+  "🐍 蛇年大順，身體好，吃嘛嘛香，睡得又甜！",
+  "🐍 健康是最棒的財富！願你活力滿滿一整年！",
+  "🐍 銀蛇盤福，為你送上無病無痛的一年！",
+  
+  "🐍 錢財如金蛇蜿蜒，源源不絕進你家！",
+  "🐍 今年存款變長條，存摺數字往上飆！",
+  "🐍 你的財富像蛇一樣蜿蜒成山，越來越多！",
+  "🐍 投資全勝，股票翻倍，暴富不是夢！",
+  "🐍 銀蛇招財，願你今年賺大錢，天天開心數鈔票！",
+  "🐍 今年鈔票像蛇群一樣，狂湧到你的戶頭！",
+  "🐍 幸運來襲！暴富機會在等你，千萬要接住！",
+  "🐍 這一年，買什麼都賺，存什麼都翻倍！",
+  "🐍 今年財運爆棚，走路都能撿到錢！",
+  "🐍 錢包鼓鼓，卡刷不爆，富貴雙全！",
+  
+  "🐍 今年開心每一天，煩惱全部像蛇皮一樣脫落！",
+  "🐍 好運跟著你，霉運繞道走，幸運之神天天陪你！",
+  "🐍 今年大吉大利，想做的事情都能順利完成！",
+  "🐍 這一年，壞心情全掃除，好運氣全都來！",
+  "🐍 願你的日子像蛇滑行一樣順暢無阻！",
+  "🐍 生活像銀蛇舞動，精彩豐富，天天開心！",
+  "🐍 心情每天都像陽光一樣燦爛，笑容停不下來！",
+  "🐍 今年貴人滿滿，機會多多，好事接二連三！",
+  "🐍 這一年你將成為最幸運的那個人！",
+  "🐍 笑口常開，樂事不斷，開心迎接每一天！"
 ];
 
 const randomPrize = prizePool[Math.floor(Math.random() * prizePool.length)];
-hiddenContent.innerText = randomPrize;
-hiddenContent.style.opacity = 0; // 初始設為完全透明
 
-// **繪製金色背景**
-const drawGoldTexture = () => {
-  const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-  gradient.addColorStop(0, "#d4af37");
+// **繪製底層獎項**
+const drawPrizeText = () => {
+  resultCtx.fillStyle = "red";
+  resultCtx.font = "20px Arial";
+  resultCtx.textAlign = "center";
+  resultCtx.fillText(randomPrize, resultCanvas.width / 2, resultCanvas.height / 2);
+};
+drawPrizeText();
+
+// **繪製上層刮刮樂**
+const drawGoldLayer = () => {
+  const gradient = scratchCtx.createLinearGradient(0, 0, scratchCanvas.width, scratchCanvas.height);
+  gradient.addColorStop(0, "#d4af37"); // 金色
   gradient.addColorStop(0.3, "#f5d76e");
   gradient.addColorStop(0.6, "#b8860b");
   gradient.addColorStop(1, "#f5d76e");
 
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  scratchCtx.fillStyle = gradient;
+  scratchCtx.fillRect(0, 0, scratchCanvas.width, scratchCanvas.height);
 
-  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  const imageData = scratchCtx.getImageData(0, 0, scratchCanvas.width, scratchCanvas.height);
   for (let i = 0; i < imageData.data.length; i += 4) {
     const random = Math.random() * 30;
     imageData.data[i] += random;
     imageData.data[i + 1] += random;
     imageData.data[i + 2] += random;
   }
-  ctx.putImageData(imageData, 0, 0);
+  scratchCtx.putImageData(imageData, 0, 0);
 };
+drawGoldLayer();
 
-drawGoldTexture();
-
-// **刮刮樂邏輯**
+// **刮刮樂功能**
 let isScratching = false;
 
-// **取得觸控 / 滑鼠位置**
 const getTouchPos = (event) => {
-  const rect = canvas.getBoundingClientRect();
+  const rect = scratchCanvas.getBoundingClientRect();
   if (event.touches) {
     return {
       x: event.touches[0].clientX - rect.left,
@@ -68,12 +92,11 @@ const getTouchPos = (event) => {
   };
 };
 
-// **刮除效果**
 const scratch = (x, y, size) => {
-  ctx.globalCompositeOperation = "destination-out";
-  ctx.beginPath();
-  ctx.ellipse(x, y, size * 1.5, size, 0, 0, Math.PI * 2);
-  ctx.fill();
+  scratchCtx.globalCompositeOperation = "destination-out";
+  scratchCtx.beginPath();
+  scratchCtx.ellipse(x, y, size * 1.5, size, 0, 0, Math.PI * 2);
+  scratchCtx.fill();
 };
 
 // **開始刮除**
@@ -89,35 +112,19 @@ const moveScratch = (e) => {
   e.preventDefault();
   const pos = getTouchPos(e);
   scratch(pos.x, pos.y, 25);
-  updateVisibility(); // ✅ 每次刮除時動態調整透明度
 };
 
 // **停止刮除**
 const endScratch = () => {
   isScratching = false;
-  updateVisibility();
-};
-
-// **讓 `hiddenContent` 逐漸顯示**
-const updateVisibility = () => {
-  const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  let clearPixels = 0;
-  const totalPixels = imgData.data.length / 4;
-
-  for (let i = 3; i < imgData.data.length; i += 4) {
-    if (imgData.data[i] === 0) clearPixels++;
-  }
-
-  const clearRatio = clearPixels / totalPixels;
-  hiddenContent.style.opacity = clearRatio; // ✅ 讓內容根據刮除程度逐漸變清晰
 };
 
 // **綁定事件**
-canvas.addEventListener("mousedown", startScratch);
-canvas.addEventListener("mousemove", moveScratch);
-canvas.addEventListener("mouseup", endScratch);
-canvas.addEventListener("mouseleave", endScratch);
+scratchCanvas.addEventListener("mousedown", startScratch);
+scratchCanvas.addEventListener("mousemove", moveScratch);
+scratchCanvas.addEventListener("mouseup", endScratch);
+scratchCanvas.addEventListener("mouseleave", endScratch);
 
-canvas.addEventListener("touchstart", startScratch);
-canvas.addEventListener("touchmove", moveScratch);
-canvas.addEventListener("touchend", endScratch);
+scratchCanvas.addEventListener("touchstart", startScratch);
+scratchCanvas.addEventListener("touchmove", moveScratch);
+scratchCanvas.addEventListener("touchend", endScratch);
