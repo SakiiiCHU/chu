@@ -62,19 +62,17 @@ h2 {
 /* 🔥 底部獎項內容 */
 .hidden-content {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: white;  /* 確保背景乾淨 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;  /* 增加字體大小 */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
   font-weight: bold;
-  color: #b71c1c;
-  z-index: 1;
+  color: red;
+  text-align: center;
+  line-height: 1.5;
+  visibility: hidden; /* 預設隱藏，等刮開超過 50% 才顯示 */
 }
+
 
 /* 🖌️ 刮刮樂金色層 */
 canvas {
@@ -103,3 +101,23 @@ canvas {
     font-size: 26px; /* 手機版文字更大 */
   }
 }
+
+/* 
+ 設定中獎結果
+const prizePool = [
+    "🐍 恭喜你中了1000萬～找胖虎領獎去！🎉",
+    "🐍 蛇來運轉，財源滾滾！🎉",
+    "🐍 靈蛇獻瑞，好運連連！🎉",
+    "🐍 今年行大運，錢包變長條！🎉",
+    "🐍 龍騰虎躍，蛇年大發！🎉",
+    "🐍 變身靈蛇，靈活閃避窮神！🎉",
+    "🐍 蛇來運轉，買股票不當韭菜！🎉",
+    "🐍 銀蛇狂舞，鈔票滿庫！🎉",
+    "🐍 新年開運，卷起一波好運勢！🎉",
+    "🐍 這一年，財富像蛇一樣蜿蜒成山！🎉",
+    "🐯 恭喜獲得一顆肥美的胖虎頭！但好像沒人要？😂",
+    "🐯 胖虎親手送你一張「懶惰券」，今年繼續耍廢！",
+    "🐯 你刮開了一個胖虎抱枕！可是胖虎說：「不給！」",
+    "🐯 你抽中了「胖虎貼紙」！但它已經被胖虎自己舔走了！😂",
+    "🐯 胖虎對你說：「我決定讓你變成我的小弟！要幫我收紅包！」",
+]; */
