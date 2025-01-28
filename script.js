@@ -4,7 +4,7 @@ canvas.width = 300;
 canvas.height = 150;
 const hiddenContent = document.getElementById("hiddenContent");
 
-// **將獎項設定給 `hiddenContent` 而不是 `canvas`**
+// **將獎項設定給 `hiddenContent`**
 const prizePool = [
   "🐍 恭喜你中了1000萬～找胖虎領獎去！🎉",
   "🐍 蛇來運轉，財源滾滾！🎉",
@@ -24,9 +24,10 @@ const prizePool = [
 ];
 
 const randomPrize = prizePool[Math.floor(Math.random() * prizePool.length)];
-hiddenContent.innerText = randomPrize; // ✅ 正確設定獎項
+hiddenContent.innerText = randomPrize;
+hiddenContent.style.opacity = 0; // 初始設為完全透明
 
-// 繪製高質感金色背景
+// **繪製金色背景**
 const drawGoldTexture = () => {
   const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
   gradient.addColorStop(0, "#d4af37");
@@ -49,8 +50,10 @@ const drawGoldTexture = () => {
 
 drawGoldTexture();
 
-// 刮刮樂功能
+// **刮刮樂邏輯**
 let isScratching = false;
+
+// **取得觸控 / 滑鼠位置**
 const getTouchPos = (event) => {
   const rect = canvas.getBoundingClientRect();
   if (event.touches) {
@@ -65,6 +68,7 @@ const getTouchPos = (event) => {
   };
 };
 
+// **刮除效果**
 const scratch = (x, y, size) => {
   ctx.globalCompositeOperation = "destination-out";
   ctx.beginPath();
@@ -72,23 +76,30 @@ const scratch = (x, y, size) => {
   ctx.fill();
 };
 
+// **開始刮除**
 const startScratch = (e) => {
   isScratching = true;
   const pos = getTouchPos(e);
   scratch(pos.x, pos.y, 20);
 };
 
+// **持續刮除**
 const moveScratch = (e) => {
   if (!isScratching) return;
   e.preventDefault();
   const pos = getTouchPos(e);
   scratch(pos.x, pos.y, 25);
+  updateVisibility(); // ✅ 每次刮除時動態調整透明度
 };
 
+// **停止刮除**
 const endScratch = () => {
   isScratching = false;
+  updateVisibility();
+};
 
-  // 計算刮除比例
+// **讓 `hiddenContent` 逐漸顯示**
+const updateVisibility = () => {
   const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
   let clearPixels = 0;
   const totalPixels = imgData.data.length / 4;
@@ -98,12 +109,10 @@ const endScratch = () => {
   }
 
   const clearRatio = clearPixels / totalPixels;
-  if (clearRatio > 0.5) {
-    hiddenContent.style.visibility = "visible"; // ✅ 刮開 50% 時顯示獎項
-  }
+  hiddenContent.style.opacity = clearRatio; // ✅ 讓內容根據刮除程度逐漸變清晰
 };
 
-// 設置事件監聽
+// **綁定事件**
 canvas.addEventListener("mousedown", startScratch);
 canvas.addEventListener("mousemove", moveScratch);
 canvas.addEventListener("mouseup", endScratch);

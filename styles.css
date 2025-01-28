@@ -67,10 +67,11 @@ h2 {
   transform: translate(-50%, -50%);
   font-size: 24px;
   font-weight: bold;
-  color: white;
+  color: red;
   text-align: center;
   line-height: 1.5;
-  visibility: hidden; /* 預設隱藏，等刮開超過 50% 才顯示 */
+  opacity: 0; /* 初始完全透明 */
+
 }
 
 
