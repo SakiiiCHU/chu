@@ -70,8 +70,7 @@ h2 {
   color: white;
   text-align: center;
   line-height: 1.5;
-  opacity: 0; /* 初始完全透明 */
-
+  visibility: hidden; /* 預設隱藏，等刮開超過 50% 才顯示 */
 }
 
 
