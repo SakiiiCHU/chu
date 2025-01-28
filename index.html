@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新春刮刮樂</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="container">
+    <h2>刮開你的2025新春祝福</h2>
+
+    <div class="scratch-card">
+      <div class="card-border">
+        <div class="card-header">Dear <span id="recipient-name">貓貓的朋友</span></div>
+
+        <!-- 刮刮樂區域 -->
+        <div class="scratch-area">
+          <div class="hidden-content" id="hiddenContent">🎉 恭喜！您獲得 888 元大獎！ 🎉</div>
+          <canvas id="scratchCanvas"></canvas>
+        </div>
+
+        <div class="card-footer">From <span id="sender-name">CHU</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

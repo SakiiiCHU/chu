@@ -1,0 +1,105 @@
+/* 全局樣式 */
+body {
+  font-family: "Arial", sans-serif;
+  text-align: center;
+  background-color: #f8f4e3;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 100%;
+  margin: 30px auto;
+  padding: 15px;
+}
+
+/* 讓標題更有視覺效果 */
+h2 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #a10e0e;
+  margin-bottom: 20px;
+}
+
+/* 🃏 刮刮樂卡片區域 */
+.scratch-card {
+  position: relative;
+  width: 90%;
+  max-width: 400px;  /* 避免在大螢幕上太大 */
+  height: 280px;  /* 增加高度，讓卡片更大 */
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+/* 紅色外框設計 */
+.card-border {
+  background-color: #d32f2f;
+  border-radius: 15px;
+  padding: 12px;
+  position: relative;
+}
+
+/* 🎨 讓文字區塊更顯眼 */
+.card-header, .card-footer {
+  font-size: 20px;  /* 字體變大 */
+  font-weight: bold;
+  color: #ffcc00;
+  padding: 8px 0;
+}
+
+/* 📌 刮刮樂區域 */
+.scratch-area {
+  position: relative;
+  width: 100%;
+  height: 180px; /* 增加可刮除的區域 */
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* 🔥 底部獎項內容 */
+.hidden-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;  /* 確保背景乾淨 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;  /* 增加字體大小 */
+  font-weight: bold;
+  color: #b71c1c;
+  z-index: 1;
+}
+
+/* 🖌️ 刮刮樂金色層 */
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  z-index: 2;
+  border-radius: 10px;
+}
+
+/* 📱 響應式設計：手機版卡片適應螢幕 */
+@media (max-width: 480px) {
+  .scratch-card {
+    width: 95%;
+    height: 300px;  /* 手機版卡片更大 */
+  }
+  
+  .scratch-area {
+    height: 200px;  /* 增加刮刮樂區域 */
+  }
+  
+  .hidden-content {
+    font-size: 26px; /* 手機版文字更大 */
+  }
+}
